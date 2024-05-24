@@ -1,3 +1,4 @@
+import { auth } from '@/app/auth'
 import prisma from '@/lib/prisma'
 import { NextResponse, NextRequest } from 'next/server'
 
@@ -22,15 +23,20 @@ export async function POST(request: Request) {
 
     const body = await request.json()
 
-    const todo = await prisma.todo.create({data:body})
+    const todo = await prisma.todo.create({ data: body })
 
-    return NextResponse.json(todo,{status:201})
+    return NextResponse.json(todo, { status: 201 })
 }
 
 
 export async function DELETE(request: Request) {
 
-    const todo = await prisma.todo.deleteMany({where:{complete:true}})
+    const session = await auth()
+    if (!session) {
+        return NextResponse.json({ status: 404 })
+    }
+    //console.log(session.user?.id)
+    const todo = await prisma.todo.deleteMany({ where: { userId: session.user?.id, complete: true } })
 
-    return NextResponse.json(todo,{status:200})
+    return NextResponse.json(todo, { status: 200 })
 }

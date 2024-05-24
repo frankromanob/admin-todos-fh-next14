@@ -53,7 +53,7 @@ export const SideBar = async () => {
 
   const userName = session?.user?.name ?? 'No Name'
   const userAvatarUrl = session?.user?.picture ?? "https://tailus.io/sources/blocks/leadership/preview/images/woman1.jpg"
-  const userRole = session?.user?.roles
+  // const userRole = session?.user?.roles ?? ['No role']
 
 
 
@@ -69,7 +69,7 @@ export const SideBar = async () => {
         <div className="mt-8 text-center">
           <Image width={50} height={50} src={userAvatarUrl} priority={true} alt="Admin" className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{userName}</h5>
-          <span className="hidden text-gray-400 lg:block">{userRole?.join(', ')}</span>
+          {/* <span className="hidden text-gray-400 lg:block">{userRole?.join(', ')}</span> */}
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">

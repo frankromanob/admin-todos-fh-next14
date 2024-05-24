@@ -10,7 +10,7 @@ export default function ProfilePage() {
     console.log(JSON.stringify(session))
     const userName = session.user?.name ?? 'No Name'
     const userAvatarUrl = session.user?.picture ?? "No image"
-    const userRoles = session.user?.roles ?? ['No roles']
+    // const userRoles = session.user?.roles ?? ['No roles']
     const userId = session.user?.id ?? 'No UUID'
     const userEmail = session.user?.email ?? 'No Email'
     // }
@@ -23,7 +23,7 @@ export default function ProfilePage() {
                 <span>{userEmail}</span>
                 <span>{userAvatarUrl}</span>
                 <span>{userId}</span>
-                <span>{userRoles}</span>
+                {/* <span>{userRoles}</span> */}
             </div>
 
         </div>

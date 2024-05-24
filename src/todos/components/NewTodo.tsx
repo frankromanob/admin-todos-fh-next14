@@ -2,21 +2,25 @@
 
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import * as todosApi from '@/todos/helpers/todos';
-import { useRouter } from "next/navigation";
 import { addTodo, deleteCompleted } from "../actions/todo-actions";
+import { useSession } from "next-auth/react";
 
 
 
 export const NewTodo = () => {
     const [description, setDescription] = useState("")
 
+    const { data } = useSession()
+    if (!data) { return }
+    const userId = (data as any).token.id ?? 'noId'
+
+
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (description.trim().length === 0) return;
 
-        await addTodo(description)
+        await addTodo(description, userId)
         setDescription('')
 
     }
